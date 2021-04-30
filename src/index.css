@@ -5,7 +5,7 @@
     @apply md:text-4xl text-2xl font-bold font-serif tracking-wide md:antialiased;
   }
   h2 {
-    @apply text-xl font-medium;
+    @apply text-xl font-medium text-prim flex items-stretch bg-ter justify-center shadow;
   }
   h3 {
     @apply text-lg;

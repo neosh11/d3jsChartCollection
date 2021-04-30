@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
+import Card from '../Card'
 
 const useD3 = (renderChartFn: (svg: any) => void, dependencies: React.DependencyList | undefined) => {
   const ref = useRef(null)
@@ -65,16 +66,6 @@ const DrawChart = () => {
       svg.attr('width', width).attr('height', height)
 
       const yScale = d3.scaleLinear().domain(d3.extent(data, yAccessor)).range([boundedHeight, 0]).nice()
-
-      const freezingTemperatures = svg
-        .select('.bounds')
-        .append('rect')
-        .attr('x', 0)
-        .attr('width', boundedWidth)
-        .attr('y', 0)
-        .attr('height', boundedHeight)
-        .attr('fill', '#e0f3f3')
-
       const xScale = d3.scaleLinear().domain(d3.extent(data, xAccessor)).range([0, boundedWidth]).nice()
 
       const lineGenerator = d3
@@ -121,10 +112,10 @@ const DrawChart = () => {
 
 const LineChart = () => {
   return (
-    <div className='flex flex-col justify-center'>
+    <Card>
       <h2>Line Chart</h2>
       <DrawChart />
-    </div>
+    </Card>
   )
 }
 
