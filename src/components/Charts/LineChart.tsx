@@ -46,17 +46,15 @@ const DrawChart = () => {
 
   const dimensions = {
     margin: {
-      top: 15,
-      right: 15,
-      bottom: 40,
-      left: 60
+      top: 20,
+      right: 20,
+      bottom: 50,
+      left: 50
     }
   }
 
   const ref = useD3(
     (svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, any>) => {
-      console.log(svg.node()?.getBoundingClientRect().width)
-
       const width = svg.node()?.getBoundingClientRect().width
       const height = svg.node()?.getBoundingClientRect().height
       if (!width || !height) return
@@ -66,7 +64,7 @@ const DrawChart = () => {
 
       svg.attr('width', width).attr('height', height)
 
-      const yScale = d3.scaleLinear().domain(d3.extent(data, yAccessor)).range([boundedHeight, 0])
+      const yScale = d3.scaleLinear().domain(d3.extent(data, yAccessor)).range([boundedHeight, 0]).nice()
 
       const freezingTemperatures = svg
         .select('.bounds')
@@ -77,7 +75,7 @@ const DrawChart = () => {
         .attr('height', boundedHeight)
         .attr('fill', '#e0f3f3')
 
-      const xScale = d3.scaleLinear().domain(d3.extent(data, xAccessor)).range([0, boundedWidth])
+      const xScale = d3.scaleLinear().domain(d3.extent(data, xAccessor)).range([0, boundedWidth]).nice()
 
       const lineGenerator = d3
         .line<IPoint>()
@@ -121,13 +119,13 @@ const DrawChart = () => {
   )
 }
 
-const Chart = () => {
+const LineChart = () => {
   return (
-    <>
-      <h1>Chart</h1>
+    <div className='flex flex-col justify-center'>
+      <h2>Line Chart</h2>
       <DrawChart />
-    </>
+    </div>
   )
 }
 
-export default Chart
+export default LineChart

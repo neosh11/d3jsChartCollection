@@ -1,12 +1,16 @@
 import React from 'react'
 import './App.css'
-import Chart from './Components/Charts'
+import LineChart from './components/Charts/LineChart'
+import ScatterChart from './components/Charts/ScatterChart'
 
 function App() {
   return (
     <div className='App'>
-      <header>Hello D3JS</header>
-      <Chart />
+      <div className='flex items-stretch bg-sec justify-center'>
+        <h1 className='text-prim'>Hello D3JS</h1>
+      </div>
+      <LineChart />
+      <ScatterChart />
     </div>
   )
 }
