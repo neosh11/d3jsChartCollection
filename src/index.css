@@ -8,14 +8,14 @@
     @apply text-xl font-medium text-prim flex items-stretch bg-ter justify-center shadow;
   }
   h3 {
-    @apply text-lg;
+    @apply text-lg text-prim flex items-stretch bg-sec justify-center shadow;
   }
   a {
     @apply text-link-on;
   }
 
   p {
-    @apply p-1
+    @apply p-1;
   }
 
   html,
@@ -23,13 +23,13 @@
     @apply bg-prim text-tex-prim tracking-wide leading-loose font-bubbly font-normal;
   }
 
-  input, textarea, select{
-    @apply text-tex-sec
+  input,
+  textarea,
+  select {
+    @apply text-tex-sec;
   }
 }
 
 @tailwind components;
-
-
 
 @tailwind utilities;
