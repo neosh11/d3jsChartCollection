@@ -78,18 +78,53 @@ const DrawChart = (props: { data: number[]; init: boolean }) => {
       const mean = d3.mean(data)
       const binGroups = bounds.selectAll<SVGRectElement, d3.Bin<number, number>>('rect').data(bins)
 
+      // create a tooltip
+      const tooltipG = svg.select('.tooltipG').append('g').style('opacity', 0)
+
+      tooltipG.append('rect').attr('height', 50).attr('width', 100).attr('x', 0).attr('y', -25).attr('fill', colors.sec)
+
+      const tooltip = tooltipG
+        .append('text')
+        .attr('class', 'tooltip')
+        .style('background-color', 'white')
+        .style('border', 'solid')
+        .style('border-width', '2px')
+        .style('border-radius', '5px')
+        .attr('x', 20)
+        .attr('y', 25 / 2)
+
+      const mouseover = function (e, d) {
+        tooltipG.attr('transform', 'translate(' + (d3.pointer(e)[0] - 10) + ',' + (d3.pointer(e)[1] - 10) + ')')
+        tooltip.html('Total: ' + d.length)
+        d3.select(this).style('fill', colors.ter)
+        d3.select(this).style('stroke', 'black').style('opacity', 1)
+        tooltipG.style('opacity', 1)
+      }
+      const mousemove = function (e, d) {
+        tooltipG.attr('transform', 'translate(' + (d3.pointer(e)[0] - 10) + ',' + (d3.pointer(e)[1] - 10) + ')')
+        tooltip.html('Total: ' + d.length)
+      }
+      const mouseleave = function () {
+        tooltipG.style('opacity', 0)
+        d3.select(this).style('fill', colors.sec)
+        d3.select(this).style('stroke', 'none').style('opacity', 0.8)
+      }
+
       const updateBars = () => {
         // barRects
         binGroups
           .enter()
           .append('rect')
+          .on('mouseenter', mouseover)
+          .on('mouseout', mouseleave)
+          .on('mousemove', mousemove)
+          .style('fill', colors.sec)
           .merge(binGroups)
           .transition(updateTransition)
           .attr('x', d => xScale(d.x0) + barPadding)
           .attr('y', d => yScale(yAccessor(d)))
-          .attr('height', d => boundedHeight - yScale(yAccessor(d)))
+          .attr('height', d => d3.max([boundedHeight - yScale(yAccessor(d))]))
           .attr('width', d => d3.max([0, xScale(d.x1) - xScale(d.x0) - barPadding]))
-          .style('fill', colors.sec)
 
         // x-axis
         bounds.select<SVGGElement>('.x-axis').transition(updateTransition).call(xAxisGenerator)
@@ -173,7 +208,8 @@ const DrawChart = (props: { data: number[]; init: boolean }) => {
         height: 500,
         width: '100%',
         marginRight: '0px',
-        marginLeft: '0px'
+        marginLeft: '0px',
+        overflow: 'visible'
       }}
     >
       <g
@@ -182,6 +218,7 @@ const DrawChart = (props: { data: number[]; init: boolean }) => {
           transform: `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
         }}
       />
+      <g className='tooltipG' />
     </svg>
   )
 }

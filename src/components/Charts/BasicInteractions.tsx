@@ -14,21 +14,12 @@ const useD3 = (renderChartFn: (svg: any) => void, dependencies: React.Dependency
   }, [renderChartFn, dependencies])
   return ref
 }
-
-interface Props {
-  data: IPoint[]
+interface IData {
+  loc: number
+  color: string
 }
 
-const DrawChart = ({ data }: Props) => {
-  interface IPoint {
-    x: number
-    y: number
-  }
-  type TData = IPoint[]
-
-  const yAccessor = (d: IPoint) => d.y
-  const xAccessor = (d: IPoint) => d.x
-
+const DrawChart = () => {
   //   const wrapper = d3.select('#wrapper')
   //   const svg = wrapper.append('svg')
 
@@ -47,34 +38,46 @@ const DrawChart = ({ data }: Props) => {
       const height = svg.node()?.getBoundingClientRect().height
       if (!width || !height) return
 
+      const bounds = svg.select('.bounds')
+
       const boundedWidth = width - dimensions.margin.left - dimensions.margin.right
       const boundedHeight = height - dimensions.margin.top - dimensions.margin.bottom
 
       svg.attr('width', width).attr('height', height)
+      const data: IData[] = [
+        { loc: 0, color: 'red' },
+        { loc: 1, color: 'blue' },
+        { loc: 2, color: 'green' },
+        { loc: 3, color: 'pink' }
+      ]
 
-      const yScale = d3.scaleLinear().domain(d3.extent(data, yAccessor)).range([boundedHeight, 0]).nice()
-      const xScale = d3.scaleLinear().domain(d3.extent(data, xAccessor)).range([0, boundedWidth]).nice()
+      const yScale = d3.scaleLinear().domain([0, 1]).range([boundedHeight, 0]).nice()
+      const xScale = d3.scaleLinear().domain([0, data.length]).range([0, boundedWidth]).nice()
 
-      const lineGenerator = d3
-        .line<IPoint>()
-        .x(d => xScale(d.x))
-        .y(d => yScale(d.y))
+      const barPadding = 10
 
-      const line = svg
-        .select('.bounds')
-        .append('path')
-        .attr('d', lineGenerator(data))
-        .attr('fill', 'none')
+      const recGroup = bounds.selectAll<SVGRectElement, d3.Bin<number, number>>('rect').data(data)
+      recGroup
+        .enter()
+        .append('rect')
+
+        .attr('x', d => xScale(d.loc))
+        .attr('y', d3.max([0, (boundedHeight - xScale(1)) / 2]))
+        .attr('height', d3.max([0, xScale(1) - barPadding]))
+        .attr('width', d3.max([0, xScale(1) - barPadding]))
+        .attr('fill', 'lightgrey')
         .attr('stroke', '#af9358')
         .attr('stroke-width', 2)
-
-      const yAxisGenerator = d3.axisLeft(yScale)
-      const yAxis = svg.select('.bounds').append('g').call(yAxisGenerator)
-
-      const xAxisGenerator = d3.axisBottom(xScale)
-      const xAxis = svg.select('.bounds').append('g').call(xAxisGenerator)
+        // .dispatch('mouseout')
+        .on('mouseenter', function (e, data) {
+          console.log(data)
+          d3.select(this).style('fill', data.color)
+        })
+        .on('mouseout', function () {
+          d3.select(this).style('fill', 'lightgrey')
+        })
     },
-    [data.length, dimensions]
+    [dimensions]
   )
 
   return (
@@ -87,6 +90,7 @@ const DrawChart = ({ data }: Props) => {
         marginLeft: '0px'
       }}
     >
+      <g id='tooltip'>test</g>
       <g
         className='bounds'
         style={{
@@ -97,13 +101,13 @@ const DrawChart = ({ data }: Props) => {
   )
 }
 
-const LineChart = ({ data }: Props) => {
+const BasicInteractions = () => {
   return (
     <Card>
-      <h2>Line Chart</h2>
-      <DrawChart data={data} />
+      <h2>Basic Interactions</h2>
+      <DrawChart />
     </Card>
   )
 }
 
-export default LineChart
+export default BasicInteractions
