@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/d3jsChartCollection/static/css/main.0146323c.chunk.css",
-    "main.js": "/d3jsChartCollection/static/js/main.85e47fee.chunk.js",
-    "main.js.map": "/d3jsChartCollection/static/js/main.85e47fee.chunk.js.map",
-    "runtime-main.js": "/d3jsChartCollection/static/js/runtime-main.4b7473bb.js",
-    "runtime-main.js.map": "/d3jsChartCollection/static/js/runtime-main.4b7473bb.js.map",
-    "static/js/2.6f9da1c0.chunk.js": "/d3jsChartCollection/static/js/2.6f9da1c0.chunk.js",
-    "static/js/2.6f9da1c0.chunk.js.map": "/d3jsChartCollection/static/js/2.6f9da1c0.chunk.js.map",
-    "static/js/3.64de0295.chunk.js": "/d3jsChartCollection/static/js/3.64de0295.chunk.js",
-    "static/js/3.64de0295.chunk.js.map": "/d3jsChartCollection/static/js/3.64de0295.chunk.js.map",
+    "main.css": "/d3jsChartCollection/static/css/main.0ad9c4b2.chunk.css",
+    "main.js": "/d3jsChartCollection/static/js/main.b86671a5.chunk.js",
+    "main.js.map": "/d3jsChartCollection/static/js/main.b86671a5.chunk.js.map",
+    "runtime-main.js": "/d3jsChartCollection/static/js/runtime-main.a48c9634.js",
+    "runtime-main.js.map": "/d3jsChartCollection/static/js/runtime-main.a48c9634.js.map",
+    "static/js/2.e84dbbc6.chunk.js": "/d3jsChartCollection/static/js/2.e84dbbc6.chunk.js",
+    "static/js/2.e84dbbc6.chunk.js.map": "/d3jsChartCollection/static/js/2.e84dbbc6.chunk.js.map",
+    "static/js/3.1e1e5d87.chunk.js": "/d3jsChartCollection/static/js/3.1e1e5d87.chunk.js",
+    "static/js/3.1e1e5d87.chunk.js.map": "/d3jsChartCollection/static/js/3.1e1e5d87.chunk.js.map",
     "index.html": "/d3jsChartCollection/index.html",
-    "static/css/main.0146323c.chunk.css.map": "/d3jsChartCollection/static/css/main.0146323c.chunk.css.map",
-    "static/js/2.6f9da1c0.chunk.js.LICENSE.txt": "/d3jsChartCollection/static/js/2.6f9da1c0.chunk.js.LICENSE.txt"
+    "static/css/main.0ad9c4b2.chunk.css.map": "/d3jsChartCollection/static/css/main.0ad9c4b2.chunk.css.map",
+    "static/js/2.e84dbbc6.chunk.js.LICENSE.txt": "/d3jsChartCollection/static/js/2.e84dbbc6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.4b7473bb.js",
-    "static/js/2.6f9da1c0.chunk.js",
-    "static/css/main.0146323c.chunk.css",
-    "static/js/main.85e47fee.chunk.js"
+    "static/js/runtime-main.a48c9634.js",
+    "static/js/2.e84dbbc6.chunk.js",
+    "static/css/main.0ad9c4b2.chunk.css",
+    "static/js/main.b86671a5.chunk.js"
   ]
 }
