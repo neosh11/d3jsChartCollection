@@ -107,7 +107,6 @@ const DrawChart = (props: { data: number[]; init: boolean }) => {
       }
 
       if (props.init == true) {
-        
         const yAxis = bounds.append('g').attr('class', 'y-axis').call(yAxisGenerator)
 
         // yAxisLabel
@@ -198,11 +197,11 @@ const BarChart = (props: Props) => {
     <Card>
       <h2>Bar Chart</h2>
       <div className='flex md:flex-row flex-col h-full'>
-        <div className='w-3/4 space-y-2'>
-          <h3>X map</h3>
+        <div className='md:w-3/4 space-y-2'>
+          <h3>{data.metric} map</h3>
           <DrawChart data={data.data} init={data.init} />
         </div>
-        <div className='w-1/4 h-full content-center flex justify-center flex-wrap'>
+        <div className='md:w-1/4 h-full content-center flex justify-center flex-wrap'>
           <Button onClick={onClick} color='blue'>
             Change axis
           </Button>
